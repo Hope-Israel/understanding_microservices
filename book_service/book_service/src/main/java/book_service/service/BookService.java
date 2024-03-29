@@ -5,6 +5,9 @@ import book_service.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class BookService {
     @Autowired
@@ -13,5 +16,9 @@ public class BookService {
     public boolean addBook(Book book) {
         bookRepository.save(book);
         return true;
+    }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 }
