@@ -26,4 +26,15 @@ public class BookService {
         Book book = bookRepository.findByTitle(title);
         return book;
     }
+
+    public boolean updateBook(Long id, Book newBook) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (optionalBook.isPresent()){
+            Book existingBook = optionalBook.get();
+            existingBook.setTitle(newBook.getTitle());
+            bookRepository.save(existingBook);
+            return true;
+        }
+        return false;
+    }
 }

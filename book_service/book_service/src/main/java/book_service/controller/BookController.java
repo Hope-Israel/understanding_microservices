@@ -49,9 +49,18 @@ public class BookController {
         if (bookService.updateBook(id, book)) {
             return ResponseEntity.ok("Book updated.");
         } else {
-            return ResponseEntity(HttpStatus.BAD_REQUEST).body("Error updating book");
+            return ResponseEntity(HttpStatus.BAD_REQUEST).body("Error updating book.");
         }
 
+    }
+
+    @DeleteMapping("/book/{id")
+    public ResponseEntity<String> deleteBook(@PathVariable Long id) {
+        if (bookService.deleteBook(id)) {
+            return ResponseEntity.ok("Book deleted");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error deleting book.");
+        }
     }
 
 }
