@@ -44,4 +44,14 @@ public class BookController {
         }
     }
 
+    @PutMapping("/book/{id}")
+    public ResponseEntity<String> updateBook(@PathVariable Long id, @RequestBody Book book) {
+        if (bookService.updateBook(id, book)) {
+            return ResponseEntity.ok("Book updated.");
+        } else {
+            return ResponseEntity(HttpStatus.BAD_REQUEST).body("Error updating book");
+        }
+
+    }
+
 }
