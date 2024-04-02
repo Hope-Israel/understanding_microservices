@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+/*Creating Book Entity*/
 @Entity
 @Data
 public class Book {

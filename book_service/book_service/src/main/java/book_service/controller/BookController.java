@@ -16,6 +16,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+    /*Endpoint to add a new book, shows user success or error message*/
     @PostMapping("/book")
     public ResponseEntity<String> add(@RequestBody Book book) {
         if (bookService.addBook(book)) {
@@ -26,12 +27,14 @@ public class BookController {
 
     }
 
+    /*Endpoint to get a list of all books*/
     @GetMapping("/book")
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
 
+    /*Endpoint to retrieve a book by its title*/
     @GetMapping("/book/{title}")
     public ResponseEntity<String> getBookByTitle(@PathVariable String title) {
         String decodedTitle = URLDecoder.decode(title, StandardCharsets.UTF_8);
@@ -44,17 +47,19 @@ public class BookController {
         }
     }
 
+    /*Endpoint that updates a book by ID*/
     @PutMapping("/book/{id}")
     public ResponseEntity<String> updateBook(@PathVariable Long id, @RequestBody Book book) {
         if (bookService.updateBook(id, book)) {
             return ResponseEntity.ok("Book updated.");
         } else {
-            return ResponseEntity(HttpStatus.BAD_REQUEST).body("Error updating book.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error updating book.");
         }
 
     }
 
-    @DeleteMapping("/book/{id")
+    /*Endpoint that deletes a book by ID*/
+    @DeleteMapping("/book/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Long id) {
         if (bookService.deleteBook(id)) {
             return ResponseEntity.ok("Book deleted");

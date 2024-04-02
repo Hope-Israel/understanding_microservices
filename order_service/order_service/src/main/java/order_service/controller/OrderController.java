@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+/*Endpoint that places order for a book*/
+/*Does a GET request to book service to check if book exists*/
 @RestController
 public class OrderController {
 
