@@ -22,10 +22,14 @@ public class OrderController {
     public ResponseEntity<String> placeOrderForBook(@PathVariable String title) {
         String bookUrl = BASE_URL + title;
         ResponseEntity<String> response = restTemplate.getForEntity(bookUrl, String.class);
-        if (response.getStatusCode().is2xxSuccessful()) {
-            return ResponseEntity.ok("Order Created!");
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Book not found.");
+        try {
+            if (response.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity.ok("Order Created!");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Book not found.");
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Book not found.");
         }
     }
 }
